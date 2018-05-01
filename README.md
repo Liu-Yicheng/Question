@@ -22,11 +22,17 @@
 　　　　　数对训练效果有提高，但同时也加大了全连接层出现过拟合的可能。
      
 三.Python中Iterator和Iterable的区别？     
-　　答：1.Pyhon中 list，truple，str，dict这些都可以被迭代，但他们并不是迭代器。   
-　　　　　因为和迭代器相比有一个很大的不同，list/truple/map/dict这些数据的大小是确定的，也就是说有多少事可知的。       
-　　　　　但迭代器不是，迭代器不知道要执行多少次，所以可以理解为不知道有多少个元素，每调用一次next()，    
-　　　　　就会往下走一步，是惰性的。       
+　　答：1.Pyhon中 list，truple，str，dict这些都可以被迭代，但他们并不是迭代器。       
+　　　　　因为和迭代器相比有一个很大的不同，list/truple/map/dict这些数据的大小是确定的，也就是说有多少事可知的。            
+　　　　　但迭代器不是，迭代器不知道要执行多少次，所以可以理解为不知道有多少个元素，每调用一次next()，        
+　　　　　就会往下走一步，是惰性的。      
+　　　　　因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，    
+　　　　　直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的   
+　　　　　长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个   
+　　　　　数据时它才会计算。Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储    
+　　　　　全体自然数的。   
 　　　　2.凡是可以for循环的，都是Iterable     
 　　　　　凡是可以next()的，都是Iterator    
 　　　　3.集合数据类型如list，truple，dict，str，都是Itrable不是Iterator，但可以通过iter()函数获得一个Iterator对象    
 　　　　　Python中的for循环就是通过next实现的    
+        
