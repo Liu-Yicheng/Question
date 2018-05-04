@@ -43,7 +43,7 @@
 　　　　　历，通过__iter__每次返回一个独立的迭代器，就可以保证不同的迭代过程不会互相影响。而生成器表达式之   
 　　　　　类的结果往往是一次性的，不可以重复遍历，所以直接返回一个Iterator就好。让Iterator也实现Iterable  
 　　　　　的兼容就可以很灵活地选择返回哪一种。总结来说Iterator实现的__iter__是为了兼容Iterable的接口，从   
-　　　　　而让Iterator成为Iterable的一种实现．
+　　　　　而让Iterator成为Iterable的一种实现．    
 　　　　　链接：https://www.zhihu.com/question/44015086/answer/119281039
 
         
