@@ -49,5 +49,18 @@
 　　　　　　一.为容器对象添加 __iter__() 和 __next__() 方法（Python 2.7 中是 next()）；__iter__()     
 　　　　　　　　返回迭代器对象本身 self，__next__() 则返回每次调用 next() 或迭代时的元素；     
 　　　　　　二.内置函数 iter() 将可迭代对象转化为迭代器    
-　　　　　　三.利用生成器。生成器通过 yield 语句快速生成迭代器，省略了复杂的__iter__() & __next__()方式     
+　　　　　　三.利用生成器。生成器通过 yield 语句快速生成迭代器，省略了复杂的__iter__() & __next__()方式        
+　　　　```Python
+           class test :
+                def __init__(self, num):
+                self.num = num
+
+                def __iter__(self):
+                    for i in self.num:
+                        print('front')
+                        yield i
+                        print('behind')
+            i = iter1([1,2,3])
+            i = iter(i)
+        ```
         
