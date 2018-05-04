@@ -22,17 +22,28 @@
 　　　　　数对训练效果有提高，但同时也加大了全连接层出现过拟合的可能。
      
 三.Python中Iterator和Iterable的区别？     
-　　答：1.Pyhon中 list，truple，str，dict这些都可以被迭代，但他们并不是迭代器。       
-　　　　　因为和迭代器相比有一个很大的不同，list/truple/map/dict这些数据的大小是确定的，也就是说有多少事可知的。            
-　　　　　但迭代器不是，迭代器不知道要执行多少次，所以可以理解为不知道有多少个元素，每调用一次next()，        
-　　　　　就会往下走一步，是惰性的。      
-　　　　　因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，    
-　　　　　直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的   
-　　　　　长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个   
-　　　　　数据时它才会计算。Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储    
-　　　　　全体自然数的。   
-　　　　2.凡是可以for循环的，都是Iterable     
-　　　　　凡是可以next()的，都是Iterator    
-　　　　3.集合数据类型如list，truple，dict，str，都是Itrable不是Iterator，但可以通过iter()函数获得一个Iterator对象    
-　　　　　Python中的for循环就是通过next实现的    
+　　答：1.这是个和多态有关的问题，Python中关于迭代有两个概念，第一个是Iterable，第二个是Iterator，    
+　　　　　协议规定Iterable的__iter__方法会返回一个Iterator, Iterator的__next__方法(Python2里   
+　　　　　是next）会返回下一个迭代对象，如果迭代结束则抛出StopIteration异常。同时，Iterator自己也   
+　　　　　是一种Iterable，所以也需要实现Iterable的接口，也就是__iter__，这样在for当中两者都可以使用。    
+　　　　2.for i in j的步骤可等价为iter（j）返回一个迭代器，然后通过next（j）不断返回下一个迭代对象。    
+　　　　　对于可迭代对象来说，它本身有__iter__方法，可以被iter，之后返回迭代器后再next进行循环。   
+　　　　　对于迭代器来说，要想可以用for，就必须要提供iterable的接口，就是__iter__（或__getitem__）    
+　　　　　对于自己构造的可迭代对象（类），必须要含有__iter__方法，并且方法返回的是一个迭代器。   
+　　　　3.为什么list、dict、str等数据类型不是Iterator?   
+　　　　　这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返   
+　　　　　回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我    
+　　　　　们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算   
+　　　　　是惰性的，只有在需要返回下一个数据时它才会计算。Iterator甚至可以表示一个无限大的数据流，例如    
+　　　　　全体自然数。而使用list是永远不可能存储全体自然数的。   
+　　　　4.Python中许多方法直接返回iterator，比如itertools里面的izip等方法，如果Iterator自己不是  
+　　　　　Iterable的话，就很不方便，需要先返回一个Iterable对象，再让Iterable返回Iterator。生成器表达   
+　　　　　式也是一个iterator，显然对于生成器表达式直接使用for是非常重要的。那么为什么不只保留Iterator的   
+　　　　　接口而还需要设计Iterable呢？许多对象比如list、dict，是可以重复遍历的，甚至可以同时并发地进行遍   
+　　　　　历，通过__iter__每次返回一个独立的迭代器，就可以保证不同的迭代过程不会互相影响。而生成器表达式之   
+　　　　　类的结果往往是一次性的，不可以重复遍历，所以直接返回一个Iterator就好。让Iterator也实现Iterable  
+　　　　　的兼容就可以很灵活地选择返回哪一种。总结来说Iterator实现的__iter__是为了兼容Iterable的接口，从   
+　　　　　而让Iterator成为Iterable的一种实现．
+　　　　　链接：https://www.zhihu.com/question/44015086/answer/119281039
+
         
