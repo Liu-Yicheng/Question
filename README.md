@@ -44,7 +44,7 @@
 　　　　　类的结果往往是一次性的，不可以重复遍历，所以直接返回一个Iterator就好。让Iterator也实现Iterable  
 　　　　　的兼容就可以很灵活地选择返回哪一种。总结来说Iterator实现的__iter__是为了兼容Iterable的接口，从   
 　　　　　而让Iterator成为Iterable的一种实现．    
-　　　　　链接：https://www.zhihu.com/question/44015086/answer/119281039
+　　　　　链接：https://www.zhihu.com/question/44015086/answer/119281039     
         5.创建一个迭代器有3种方法    
 　　　　　　一.为容器对象添加 __iter__() 和 __next__() 方法（Python 2.7 中是 next()）；__iter__()     
 　　　　　　　　返回迭代器对象本身 self，__next__() 则返回每次调用 next() 或迭代时的元素；     
