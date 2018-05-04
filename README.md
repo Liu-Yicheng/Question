@@ -45,5 +45,9 @@
 　　　　　的兼容就可以很灵活地选择返回哪一种。总结来说Iterator实现的__iter__是为了兼容Iterable的接口，从   
 　　　　　而让Iterator成为Iterable的一种实现．    
 　　　　　链接：https://www.zhihu.com/question/44015086/answer/119281039
-
+        5.创建一个迭代器有3种方法    
+　　　　　　一.为容器对象添加 __iter__() 和 __next__() 方法（Python 2.7 中是 next()）；__iter__()     
+　　　　　　　　返回迭代器对象本身 self，__next__() 则返回每次调用 next() 或迭代时的元素；     
+　　　　　　二.内置函数 iter() 将可迭代对象转化为迭代器    
+　　　　　　三.利用生成器。生成器通过 yield 语句快速生成迭代器，省略了复杂的__iter__() & __next__()方式     
         
